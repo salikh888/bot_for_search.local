@@ -1,6 +1,7 @@
 import Telegraf, {Markup, session, Stage} from 'telegraf-ts';
 import {Config} from '../config';
 import {ScenesGenerator} from './scenes'
+import {main} from "../parser/script";
 
 
 const usersContextData = {};
@@ -64,7 +65,15 @@ export function init() {
     });
 
     bot.on("message", async (ctx: any) => {
-        // TODO
+        let message = ctx.message.text;
+        console.log(message);
+        // ctx.reply(queryMaker(message));
+        let arrayParams: any = await main(message);
+        if ('https://www.kinopoisk.ru/undefined' === 'https://www.kinopoisk.ru/' + arrayParams[0]) {
+            ctx.reply('Упс что то пошло не так');
+        } else {
+            ctx.reply('https://www.kinopoisk.ru/' + arrayParams[0]);
+        }
     });
 
     bot.launch();

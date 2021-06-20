@@ -4,6 +4,7 @@ import *as path from 'path';
 export class ConfigParser {
 
     public BOT_TOKEN!: string;
+    public HEADERS!: string;
 
 
     constructor() {
