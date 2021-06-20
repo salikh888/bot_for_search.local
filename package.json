@@ -1,0 +1,23 @@
+{
+  "name": "bot_for_search.local",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/salikh888/bot_for_search.local.git"
+  },
+  "author": "Salikh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/salikh888/bot_for_search.local/issues"
+  },
+  "homepage": "https://github.com/salikh888/bot_for_search.local#readme",
+  "dependencies": {
+    "typescript": "^4.3.4"
+  },
+  "devDependencies": {}
+}
