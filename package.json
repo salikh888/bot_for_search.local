@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "tsc & node build/index.js",
+    "build": "tsc",
+    "start": "node build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,7 +20,12 @@
   },
   "homepage": "https://github.com/salikh888/bot_for_search.local#readme",
   "dependencies": {
+    "dotenv": "^10.0.0",
+    "path": "^0.12.7",
+    "telegraf-ts": "^3.89.1",
     "typescript": "^4.3.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/node": "^15.12.4"
+  }
 }
