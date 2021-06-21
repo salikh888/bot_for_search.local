@@ -27,48 +27,55 @@ import axios from 'axios';
 // }
 
 
-async function getHtml(item: any) {
-    const { data }  =  await axios.get('https://www.olx.uz/list/q-' + item);
+function normalizeQuery(item: string){
+    return item.replace(/\s+/g, '-');
+}
+
+async function getHtml(item: string) {
+    const  query = normalizeQuery(item);
+    const {data} = await axios.get('https://www.olx.uz/list/q-' + query);
     return data;
 }
 
-async function cheerioLoad(item: any){
+async function cheerioLoad(item: any) {
     const $ = cheerio.load(await getHtml(item));
     return $;
 }
 
-
-function getValuePage(link:any){
+function getValuePage(link: any) {
     const arrayMatch: any = link.match('\\d{1,}$');
     return arrayMatch[0];
 }
 
-async function getLinksItems(item: string){
-    let arrayLink: Array<string | any>;
+async function getLinksItems(item: string) {
+    const arrayLinks: (string | undefined)[] = [];
     let $ = await cheerioLoad(item);
     const lastPageNumber = getValuePage($('a.block').eq(-1).attr('href'));
-    for (let i = 1; i <= lastPageNumber; i++){
-        const selector = await cheerioLoad( `${item}/?page=${i}`);
+    for (let i = 1; i <= lastPageNumber; i++) {
+
+        const selector = await cheerioLoad(`${item}/?page=${i}`);
         selector('.wrap').each((i, element) => {
-            const link = selector(element).find('a.marginright5').attr('href')
-            arrayLink.push(link);
-            return arrayLink;
-        })
-        // @ts-ignore
+
+            const link = selector(element).find('a.marginright5').attr('href');
+            arrayLinks.push(link);
+
+        });
+
 
     }
+    return arrayLinks;
 
 }
-
 
 
 //_____________________________________________
 async function test() {
-    const  data   = await  getLinksItems('ps3')
+    const data = await getLinksItems('ps3 slim')
     return data
 }
+
 (async function main() {
-     console.log(await test())
+    console.log( await test())
 
 })();
 
