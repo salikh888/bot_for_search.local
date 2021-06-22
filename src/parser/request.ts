@@ -5,10 +5,10 @@ import {Query} from "./inteface";
 
 export default class Request {
 
-    static async GetHTML(queryParams: Query, i: number) {
+    static async GetHTML(queryParams: Query, pageCount: number) {
         let URL: string;
-        if (i > 0) {
-            URL = `https://www.olx.uz${Utils.queryMayker(queryParams.city, queryParams.item)}/?page=${i}`;
+        if (pageCount > 0) {
+            URL = `https://www.olx.uz${Utils.queryMayker(queryParams.city, queryParams.item)}/?page=${pageCount}`;
         }
         URL = `https://www.olx.uz${Utils.queryMayker(queryParams.city, queryParams.item)}`
 

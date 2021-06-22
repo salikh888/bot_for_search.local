@@ -12,16 +12,16 @@ export default class Parser {
     }
 
     async GetLinksItems() {
-        let nothing: string = '';
+        let nothingFound: string = '';
         const arrayLinks: (string | undefined)[] = [];
 
         let $ = await this.cheerioLoad(this.query, 0);
         $('.emptynew').each((i, element) => {
-            nothing = $(element).find('span.marker').text();
+            nothingFound = $(element).find('span.marker').text();
         });
 
-        if (nothing === 'Проверьте правильность написания или введите другие параметры поиска') {
-            return nothing;
+        if (nothingFound === 'Проверьте правильность написания или введите другие параметры поиска') {
+            return nothingFound;
         }
 
         if ($('a.block').eq(-1).attr('href') === 'javascript:void(0);') {
